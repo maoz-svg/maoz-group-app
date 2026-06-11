@@ -1,9 +1,10 @@
-/* MAOZ GROUP — Service Worker
-   Makes the iPad/PWA version work fully OFFLINE after the first load.
-   Strategy: stale-while-revalidate — open instantly from cache, refresh in the
-   background when online so the next open shows the latest version. */
+/* MAOZ GROUP — Service Worker (v2)
+   - The page (index.html) uses NETWORK-FIRST: always loads the latest version
+     when online, and falls back to the cached copy when offline.
+   - Static assets (icons, manifest) use cache-first.
+   This guarantees updates show immediately online, while still working offline. */
 
-const CACHE = 'maoz-app-v1';
+const CACHE = 'maoz-app-v2';
 const CORE = [
   './',
   './index.html',
@@ -17,9 +18,7 @@ const CORE = [
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
-  event.waitUntil(
-    caches.open(CACHE).then((cache) => cache.addAll(CORE)).catch(() => {})
-  );
+  event.waitUntil(caches.open(CACHE).then((c) => c.addAll(CORE)).catch(() => {}));
 });
 
 self.addEventListener('activate', (event) => {
@@ -34,18 +33,30 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
 
+  const isDoc = req.mode === 'navigate' || req.destination === 'document';
+
+  if (isDoc) {
+    event.respondWith(
+      fetch(req)
+        .then((res) => {
+          const copy = res.clone();
+          caches.open(CACHE).then((c) => c.put(req, copy));
+          return res;
+        })
+        .catch(() => caches.match(req).then((r) => r || caches.match('./index.html')))
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(req).then((cached) => {
-      const network = fetch(req).then((res) => {
+      return cached || fetch(req).then((res) => {
         if (res && res.status === 200 && res.type === 'basic') {
           const copy = res.clone();
-          caches.open(CACHE).then((cache) => cache.put(req, copy));
+          caches.open(CACHE).then((c) => c.put(req, copy));
         }
         return res;
-      }).catch(() => cached);
-
-      // serve cache first (works offline); otherwise wait for the network
-      return cached || network;
+      });
     })
   );
 });
