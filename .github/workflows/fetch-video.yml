@@ -16,25 +16,26 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install ffmpeg
         run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
-      - name: Read request
-        id: req
+      - name: Fetch and re-encode each requested file
         run: |
-          echo "url=$(sed -n 1p marketing/piraeus-video/fetch-request.txt)" >> "$GITHUB_OUTPUT"
-          echo "out=$(sed -n 2p marketing/piraeus-video/fetch-request.txt)" >> "$GITHUB_OUTPUT"
-      - name: Download source
-        run: curl -fSL -o /tmp/src.mp4 "${{ steps.req.outputs.url }}"
-      - name: Re-encode for mobile compatibility
-        run: |
-          ffmpeg -y -i /tmp/src.mp4 \
-            -c:v libx264 -profile:v high -level 4.1 -pix_fmt yuv420p -crf 20 \
-            -c:a aac -b:a 160k -ar 44100 \
-            -movflags +faststart \
-            "marketing/piraeus-video/${{ steps.req.outputs.out }}"
-      - name: Commit result
+          # fetch-request.txt: pairs of lines — URL, then output filename
+          mapfile -t LINES < marketing/piraeus-video/fetch-request.txt
+          for ((i=0; i<${#LINES[@]}; i+=2)); do
+            url="${LINES[i]}"; out="${LINES[i+1]}"
+            [ -z "$url" ] && continue
+            echo "Fetching $out"
+            curl -fSL -o /tmp/src.mp4 "$url"
+            ffmpeg -y -i /tmp/src.mp4 \
+              -c:v libx264 -profile:v high -level 4.1 -pix_fmt yuv420p -crf 20 \
+              -c:a aac -b:a 160k -ar 44100 \
+              -movflags +faststart \
+              "marketing/piraeus-video/$out"
+          done
+      - name: Commit results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add "marketing/piraeus-video/${{ steps.req.outputs.out }}"
-          git commit -m "Add re-encoded marketing video ${{ steps.req.outputs.out }}"
+          git add marketing/piraeus-video/*.mp4
+          git commit -m "Add re-encoded video files"
           git pull --rebase origin claude/piraeus-marketing-video-uw3pxv
           git push origin HEAD:claude/piraeus-marketing-video-uw3pxv
