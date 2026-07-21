@@ -1,0 +1,38 @@
+name: Fetch and re-encode marketing video
+
+on:
+  workflow_dispatch:
+    inputs:
+      video_url:
+        description: 'Source video URL'
+        required: true
+      out_name:
+        description: 'Output filename (in marketing/piraeus-video/)'
+        required: true
+        default: 'final.mp4'
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - name: Download source
+        run: curl -fSL -o /tmp/src.mp4 "${{ github.event.inputs.video_url }}"
+      - name: Re-encode for mobile compatibility
+        run: |
+          ffmpeg -y -i /tmp/src.mp4 \
+            -c:v libx264 -profile:v high -level 4.1 -pix_fmt yuv420p -crf 20 \
+            -c:a aac -b:a 160k -ar 44100 \
+            -movflags +faststart \
+            "marketing/piraeus-video/${{ github.event.inputs.out_name }}"
+      - name: Commit result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "marketing/piraeus-video/${{ github.event.inputs.out_name }}"
+          git commit -m "Add re-encoded marketing video ${{ github.event.inputs.out_name }}"
+          git push
