@@ -1,4 +1,10 @@
-https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260721_055243_75ea7c52-3bda-4701-bac6-019f6d247fc2.mp4
-chess_v1.mp4
-https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260721_054754_a836316e-8e8f-4f67-9cb8-f0dde2f71f42.mp4
-horses_v1.mp4
+https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260721_062228_013afb1d-3f3d-4592-98f3-d7e0ff1337de.mp4
+run_legs.mp4
+https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260721_062241_3a76eb57-aa1c-4257-b39d-b3f068e4220b.mp4
+run_arms.mp4
+https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260721_062254_57b9dc69-dd03-42dc-add2-59546661bbfa.mp4
+run_profile.mp4
+https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260721_062304_c84e11a4-8a10-4d54-a253-80706b7c3f88.mp4
+run_back.mp4
+https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260721_062316_b7caa399-107c-409f-8f29-496db284f391.mp4
+run_eyes.mp4
