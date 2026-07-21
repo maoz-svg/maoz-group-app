@@ -3,16 +3,18 @@
 Concept: sport = hard work, grit and the will to win → "built for investors who play to win".
 Structure: 4 photoreal sports clips (16:9, 720p, Seedance 2.0, native audio, genre drama) + 12s animated closing sequence.
 
-## Assembly plan (server-side, explainer_video, free)
+## FINAL RESULT (2026-07-21)
 
-Join in order at 1280x720:
-1. Tennis v3 (10s) — fallback v1: `9176cb45-a5c5-4d1b-a1f6-3f1ec60c3834`
-2. Favela football v3 (10s) — fallback v1: `c019ca02-4257-4fcd-8349-7f134c1cbd09`
-3. NYC basketball v3 (10s) — fallback v1: `d6dc4957-f2e3-4ea2-8e85-96a4c294b861`
-4. Runner at marina v3 (12s) — fallback v1: `7669d239-efd4-4a53-b4e5-a03df371b210`
+**Final video (54s, 1280x720)**: explainer_video job `9c379b01-9538-4073-9d87-94e6d827cc4b`
+https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260721_002524_9c379b01-9538-4073-9d87-94e6d827cc4b.mp4
+
+Assembled in order at 1280x720 (v3 takes, all succeeded):
+1. Tennis v3 (10s): `9083db02-d17f-46eb-aef1-0c96f463c919` — fallback v1: `9176cb45-a5c5-4d1b-a1f6-3f1ec60c3834`
+2. Favela football v3 (10s): `a632a6e6-f3c1-4693-8be7-28155efbeff1` — fallback v1: `c019ca02-4257-4fcd-8349-7f134c1cbd09`
+3. NYC basketball v3 (10s): `33d74264-c32d-4c00-a63a-fcb46d25cdfe` (first attempt `b0819eb6` failed, refunded) — fallback v1: `d6dc4957-f2e3-4ea2-8e85-96a4c294b861`
+4. Runner at marina v3 (12s): `6b255ce1-1dc2-4907-9a06-8df33876441f` — fallback v1: `7669d239-efd4-4a53-b4e5-a03df371b210`
 5. Closing sequence (12s, locally rendered): video media_id `d9b2abcc-f5a8-489d-8081-8982c9fe5372` (endseq.mp4 — Maoz Group "מציגים" → The Harbour logo → "פרויקט הדגל שלנו בפיראוס" → "built for investors who play to win")
 
-Generation budget: 45+45+45+54 = 189 credits. Failures auto-refund; on failure use the v1 fallback job id.
 When submitting to seedance_2_0, pass declined_preset_id 24bae836-2c4a-48e0-89b6-49fcc0b21612 if a preset_recommendation notice comes back.
 
 ## v3 prompts (user feedback: correct tennis court positioning, football boots not flip-flops, more close-ups everywhere, dramatic tone, longer runner clip)
