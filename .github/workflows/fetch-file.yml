@@ -1,0 +1,32 @@
+name: Fetch generic file
+
+on:
+  push:
+    branches:
+      - claude/piraeus-marketing-video-uw3pxv
+    paths:
+      - marketing/piraeus-video/fetch-file-request.txt
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch files
+        run: |
+          mapfile -t LINES < marketing/piraeus-video/fetch-file-request.txt
+          for ((i=0; i<${#LINES[@]}; i+=2)); do
+            url="${LINES[i]}"; out="${LINES[i+1]}"
+            [ -z "$url" ] && continue
+            curl -fSL -o "marketing/piraeus-video/$out" "$url"
+          done
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add marketing/piraeus-video/
+          git commit -m "Add fetched files"
+          git pull --rebase origin claude/piraeus-marketing-video-uw3pxv
+          git push origin HEAD:claude/piraeus-marketing-video-uw3pxv
