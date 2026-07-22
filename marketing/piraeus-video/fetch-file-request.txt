@@ -1,4 +1,4 @@
-https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260722_124121_1d65275b-9398-4f15-9e92-40de6682719e.mp3
-vo_runstart.mp3
-https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260722_124129_f7906e4b-cd84-4a82-a72e-edb755012e3c.mp3
-vo_tennis_short.mp3
+https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260722_131834_a85fc7da-aa54-4f19-8e7b-c24a3b6647ab.mp3
+vo_run_opening_long.mp3
+https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260722_131842_f735de5e-12c4-42ef-8213-3644cfc55de5.mp3
+vo_closing_combined.mp3
