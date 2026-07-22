@@ -1,4 +1,2 @@
-https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260722_131834_a85fc7da-aa54-4f19-8e7b-c24a3b6647ab.mp3
-vo_run_opening_long.mp3
-https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260722_131842_f735de5e-12c4-42ef-8213-3644cfc55de5.mp3
-vo_closing_combined.mp3
+https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260722_133716_c782195b-921d-4455-ab9d-9cc7703cf4d8.mp3
+vo_closing_maoz.mp3
