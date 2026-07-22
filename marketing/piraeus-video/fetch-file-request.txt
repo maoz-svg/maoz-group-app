@@ -1,2 +1,10 @@
-https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/955717e8-8726e21a.th
-htdemucs-955717e8-8726e21a.th
+https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260722_113952_f9f63674-1cef-473d-aed6-0fe026b83ec4.mp3
+sample_en_arthur.mp3
+https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260722_114012_2b6c4dfd-8f71-4756-a1d7-460035fc31ef.mp3
+sample_en_sterling.mp3
+https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260722_114032_f8a6cafd-f148-4a17-a734-37459680a4f2.mp3
+sample_en_gideon.mp3
+https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260722_114056_531e656b-4a6b-4727-b549-e61f56f2fcd6.mp3
+sample_en_cillian.mp3
+https://d8j0ntlcm91z4.cloudfront.net/user_3EusFXVjS3iTgi4uS4zGVM2ou2F/hf_20260722_114117_ac3820ed-8be7-4e9b-b42f-c1de574a65fe.mp3
+sample_en_alistair.mp3
