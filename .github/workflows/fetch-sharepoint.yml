@@ -1,0 +1,47 @@
+name: Fetch SharePoint video
+
+on:
+  push:
+    branches:
+      - claude/piraeus-marketing-video-uw3pxv
+    paths:
+      - marketing/piraeus-video/sp-request.txt
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download from SharePoint
+        run: |
+          mapfile -t LINES < marketing/piraeus-video/sp-request.txt
+          url="${LINES[0]}"
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+          curl -fSL -A "$UA" -c /tmp/ck.txt -b /tmp/ck.txt -o /tmp/orig.bin "${url}&download=1" || \
+          curl -fSL -A "$UA" -c /tmp/ck.txt -b /tmp/ck.txt -o /tmp/orig.bin "${url}"
+          echo "--- downloaded:"; ls -la /tmp/orig.bin; file /tmp/orig.bin
+          if file /tmp/orig.bin | grep -qi 'html'; then
+            echo "GOT HTML PAGE, NOT VIDEO:"; head -c 2000 /tmp/orig.bin; exit 1
+          fi
+      - name: Compress working copy
+        run: |
+          mapfile -t LINES < marketing/piraeus-video/sp-request.txt
+          out="${LINES[1]}"
+          echo "--- source info:"
+          ffprobe -v error -show_entries format=duration,size -of default=nw=1 /tmp/orig.bin
+          ffmpeg -y -v error -i /tmp/orig.bin \
+            -vf "scale=-2:720,fps=30" \
+            -c:v libx264 -profile:v high -level 4.1 -pix_fmt yuv420p -crf 22 \
+            -c:a aac -b:a 160k -ar 44100 -movflags +faststart \
+            "marketing/piraeus-video/$out"
+          ls -la "marketing/piraeus-video/$out"
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add marketing/piraeus-video/
+          git commit -m "Add fetched SharePoint working copy"
+          git pull --rebase origin claude/piraeus-marketing-video-uw3pxv
+          git push origin HEAD:claude/piraeus-marketing-video-uw3pxv
