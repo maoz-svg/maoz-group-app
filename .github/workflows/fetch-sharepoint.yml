@@ -30,15 +30,16 @@ jobs:
           if file /tmp/orig.bin | grep -qi 'html'; then
             echo "GOT HTML PAGE, NOT VIDEO:"; head -c 2000 /tmp/orig.bin; exit 1
           fi
-      - name: Center-crop to 9:16 vertical
+      - name: Process video
         run: |
           mapfile -t LINES < marketing/piraeus-video/sp-request.txt
           out="${LINES[1]}"
+          vf="${LINES[2]:-crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=1080:1920}"
           echo "--- source info:"
           ffprobe -v error -show_entries format=duration,size -of default=nw=1 /tmp/orig.bin
           ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate -of csv=p=0 /tmp/orig.bin
           ffmpeg -y -v error -i /tmp/orig.bin \
-            -vf "crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=1080:1920" \
+            -vf "$vf" \
             -c:v libx264 -profile:v high -level 4.2 -pix_fmt yuv420p -crf 20 \
             -c:a copy -movflags +faststart \
             "marketing/piraeus-video/$out"
