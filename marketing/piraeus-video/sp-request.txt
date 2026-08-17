@@ -1,3 +1,3 @@
-https://maozgroup-my.sharepoint.com/:v:/g/personal/info_maoz-group_com/IQA4NUYnJuVvQofrEaG0eYf5AcfsVJ4vDBlEJqQ6r27sEro?e=SEA9xf
-the-harbour-reel-9x16-v2.mp4
-crop=ih*9/16:ih:x='if(lt(t,4.52),0.12*in_w,if(between(t,26.4,27.72),0.04*in_w,if(between(t,27.72,29.84),0.19*in_w,if(between(t,29.84,31.6),0.13*in_w,if(between(t,32.64,35.32),0.19*in_w,(in_w-in_h*9/16)/2)))))':y=0,scale=1080:1920
+https://maozgroup-my.sharepoint.com/:f:/g/personal/info_maoz-group_com/IgCqGynq3qatRIS_nLp4K2b2AZ0Ft1FbcQy4rh2xfnlUBAk?e=AWs5ln
+interiors.zip
+none

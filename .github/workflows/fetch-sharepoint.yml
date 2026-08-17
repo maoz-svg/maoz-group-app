@@ -36,13 +36,17 @@ jobs:
           out="${LINES[1]}"
           vf="${LINES[2]:-crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=1080:1920}"
           echo "--- source info:"
-          ffprobe -v error -show_entries format=duration,size -of default=nw=1 /tmp/orig.bin
-          ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate -of csv=p=0 /tmp/orig.bin
-          ffmpeg -y -v error -i /tmp/orig.bin \
-            -vf "$vf" \
-            -c:v libx264 -profile:v high -level 4.2 -pix_fmt yuv420p -crf 20 \
-            -c:a copy -movflags +faststart \
-            "marketing/piraeus-video/$out"
+          file /tmp/orig.bin
+          if [ "$vf" = "none" ]; then
+            cp /tmp/orig.bin "marketing/piraeus-video/$out"
+          else
+            ffprobe -v error -show_entries format=duration,size -of default=nw=1 /tmp/orig.bin
+            ffmpeg -y -v error -i /tmp/orig.bin \
+              -vf "$vf" \
+              -c:v libx264 -profile:v high -level 4.2 -pix_fmt yuv420p -crf 20 \
+              -c:a copy -movflags +faststart \
+              "marketing/piraeus-video/$out"
+          fi
           ls -la "marketing/piraeus-video/$out"
       - name: Commit results
         run: |
