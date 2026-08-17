@@ -20,7 +20,12 @@ jobs:
           for ((i=0; i<${#LINES[@]}; i+=2)); do
             url="${LINES[i]}"; out="${LINES[i+1]}"
             [ -z "$url" ] && continue
-            curl -fSL -o "marketing/piraeus-video/$out" "$url"
+            ok=0
+            for attempt in 1 2 3; do
+              if curl -fSL -o "marketing/piraeus-video/$out" "$url"; then ok=1; break; fi
+              echo "retry $attempt failed for $out"; sleep 5
+            done
+            [ "$ok" = "1" ] || echo "GIVING UP on $out"
           done
       - name: Commit results
         run: |
